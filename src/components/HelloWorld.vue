@@ -6,6 +6,10 @@
       check out the
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
     </p>
+    <div>
+      <p>Count: {{ count }}</p>
+      <button @click="increment">Increment</button>
+    </div>
     <h3>Installed CLI Plugins</h3>
     <ul>
       <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
@@ -31,10 +35,41 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
-  name: 'HelloWorld',
+  name: 'HelloWorldd',
   props: {
-    msg: String
+    msg: {
+      type: String,
+      required: true,
+      default: 'Default message'
+    }
+  },
+  // uing dat() and method: way
+  // data() {
+  //   return {
+  //     count: 0 // Initialize the count state
+  //   };
+  // },
+  // methods: {
+  //   increment() {
+  //     this.count++; // Increment the count
+  //   }
+  // }
+
+  // using ref() way
+  setup() {
+    const count = ref(1); // Create a reactive reference for count
+
+    const increment = () => {
+      count.value++; // Update the value of count
+    };
+
+    return {
+      increment, // Expose increment to the template
+      count // Expose count to the template
+    };
   }
 }
 </script>
